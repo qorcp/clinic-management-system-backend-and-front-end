@@ -1,0 +1,1231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css'
+        integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <style>
+        .row {
+            border: 1px solid gray;
+        }
+
+        label {
+            color: black;
+        }
+
+        input[type=text],
+        [type=date],
+        [type=number] {
+            width: 30%;
+            margin: 10px 10px 20px;
+            display: inline-block;
+            border: 1px solid gray;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .vertical-menu {
+            width: 100%;
+            height: 100%;
+            background-color: #62AAB3;
+            font-weight: bold;
+        }
+
+        .vertical-menu a {
+            color: black;
+            display: block;
+            border-bottom: 1px dotted gray;
+            padding: 10px 0 10px 20px;
+            text-decoration: none;
+        }
+
+        .vertical-menu li {
+            list-style: none;
+        }
+
+        .vertical-menu a:hover {
+            background-color: rgba(121, 165, 162, 1.00);
+        }
+
+        .vertical-menu a.active {
+            background-color: #007DB4;
+            color: white;
+        }
+
+        #Prescription-management {
+            padding: 10px;
+        }
+
+        /* This is information icon*/
+        #info-circle {
+            margin-right: 10px;
+            margin-left: 20px
+        }
+
+        #tab {
+            background-color: #62AAB3;
+        }
+
+        /* Style tab links */
+        .tablink {
+            background-color: #62AAB3;
+            color: white;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            font-size: 17px;
+            width: 25%;
+            font-weight: bold;
+        }
+
+        .tablink:hover {
+            background-color: #777;
+        }
+
+        /* Style the tab content (and add height:100% for full page content) */
+        .tabcontent {
+            color: white;
+            display: none;
+            padding: 50px 20px;
+            height: 100%;
+            width: 100%;
+            border-left: 2px solid gray;
+            border-right: 2px solid gray;
+        }
+
+        #Prescription-list,
+        #Add-prescription,
+        #Edit-prescription {
+            background-color: white;
+        }
+
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+            margin: 10px 10px 10px 10px;
+            size: 5px;
+            color: black;
+        }
+
+        td,
+        th {
+            border-bottom: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+            color: black;
+        }
+
+        .add-btn,
+        .update-btn {
+            background-color: #4CAF50;
+            /* Green background */
+            border: 1px solid green;
+            /* Green border */
+            color: white;
+            /* White text */
+            padding: 10px 24px;
+            /* Some padding */
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+
+        .delete-btn {
+            background-color: red;
+            /* Green background */
+            border: 1px solid green;
+            /* Green border */
+            color: white;
+            /* White text */
+            padding: 10px 5px;
+            /* Some padding */
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+
+        .edit-btn {
+            background-color: #4CAF50;
+            /* Green background */
+            border: 1px solid green;
+            /* Green border */
+            color: white;
+            /* White text */
+            padding: 10px 5px;
+            /* Some padding */
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-flued">
+        <h1 style="text-align: center; margin-top:20px;">Hospital management system</h1>
+    </div>
+
+    <!--vertical nav bar-->
+    <div class="container-flued">
+        <div class="row">
+            <div class="col-sm-2 px-0">
+                <div class="vertical-menu">
+                    <div class="vertical-menu-ul">
+                        <li><a href="dashboard.html"><i class="fa fa-bars" style="margin-right:10px;"></i>Dashboard</a></li>
+                        <li><a href="Patient.html"><i class="fa fa-id-card-alt"
+                                    style="margin-right:10px;"></i>Patient</a></li>
+                        <li><a href="visit-newpatient.html"><i class="fa fa-user"
+                                    style="margin-right:10px;"></i>Visit</a></li>
+                        <li><a class="active" href="prescription.html"><i class="fas fa-file-prescription"
+                                    style="margin-right:10px;"></i>
+                                Prescription</a></li>
+                        <li><a href="drugs.html"><i class="fas fa-pills" style="margin-right:10px;"></i>Drug</a></li>
+                        <li><a href="medicalService.html"><i class="fas fa-x-ray" style="margin-right:10px;"></i>Medical service</a></li>
+                        <li><a href="disease.html"><i class="fas fa-biohazard" style="margin-right:10px;"></i>ICD</a></li>
+                    </div>
+                </div>
+            </div>
+
+            <!--inside main row-->
+            <div class="col-sm-10">
+                <div class="row">
+                    <h1 id="Prescription-management"><i class="fa fa-info-circle" id="info-circle"></i>Prescription
+                        management</h1>
+                </div>
+
+                <div class="row" id="tab">
+                    <button class="tablink" onclick="openPage('Prescription-list', this, '#007DB4')" id="defaultOpen">
+                        <i class="fa fa-bars" style="margin-right: 10px;"></i>Prescription
+                        List</button>
+                    <button class="tablink" onclick="openPage('Add-prescription', this, '#007DB4')" ><i
+                            class="fas fa-plus" style="margin-right: 10px;"></i>Add
+                        prescription</button>
+                    <button class="tablink" onclick="openPage('Edit-prescription', this, '#007DB4')"><i
+                            class="fas fa-edit" style="margin-right: 10px;"></i>Edit
+                        prescription</button>
+                </div>
+                <div class="row">
+
+                    <div class="container">
+                        <div id="Prescription-list" class="tabcontent">
+                            <input type="text" id="searchInput" onkeyup="searchName()" placeholder="Search for names.."
+                                title="Type in a name">
+                            <table id="table-id">
+                                <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Options</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="viewTable"></tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="container">
+                        <div id="Add-prescription" class="tabcontent">
+                            <div class="row">
+
+                                <div class="col-sm-6">
+                                    <h3 style="color: black; border-bottom: 1px dotted">Patient Info</h3>
+                                    <label for="name">id:</label>
+                                    <input type="text" id="pid" readonly>
+                                    <label for="name">Name:</label>
+                                    <input type="text" id="name" readonly></br>
+                                    <label for="gender">Gender:</label>
+                                    <input type="text" id="gender" readonly>
+                                    <label for="birthdate">Birthdate:</label>
+                                    <input type="text" id="birthdate" readonly>
+                                </div>
+                                <div class="col-sm-6">
+                                    <h3 style="color: black; border-bottom: 1px dotted">Visit Info</h3>
+                                    <label for="date">date:</label>
+                                    <input type="text" id="date" readonly>
+                                    <label for="name">id:</label>
+                                    <input type="text" id="vid"></br>
+                                    <label for="problem">problems:</label></br>
+                                    <textarea name="problem" id="problem" cols="50" rows="2" readonly></textarea>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <table id="table-id1">
+                                    <thead>
+                                        <tr>
+                                            <th>Drug id</th>
+                                            <th>Drug name</th>
+                                            <th>Quantity</th>
+                                            <th>Dose</th>
+                                            <th>How to use</th>
+                                            <th></th>
+                                        </tr>
+                                        <!--1st-->
+                                        <tr>
+                                            <td><input type="text" name="drug" id="drugId" readonly></td>
+                                            <td><input type="text" name="drug" id="drugName" style="width:100%"></td>
+                                            <td><input type="number" name="quantity" id="quantity"></td>
+                                            <td><textarea name="" cols="15" rows="3" id="dose"></textarea></td>
+                                            <td><textarea name="" cols="15" rows="3" id="howtouse"></textarea></td>
+                                        </tr>
+                                        <!--2nd-->
+                                        <tr>
+                                            <td><input type="text" name="drug2" id="drugId2" readonly></td>
+                                            <td><input type="text" name="drug2" id="drugName2" style="width:100%"></td>
+                                            <td><input type="number" name="quantity2" id="quantity2"></td>
+                                            <td><textarea name="" cols="15" rows="3" id="dose2"></textarea></td>
+                                            <td><textarea name="" cols="15" rows="3" id="howtouse2"></textarea></td>
+                                        </tr>
+                                        <!--3rd-->
+                                        <tr>
+                                            <td><input type="text" name="drug3" id="drugId3" readonly></td>
+                                            <td><input type="text" name="drug3" id="drugName3" style="width:100%"></td>
+                                            <td><input type="number" name="quantity3" id="quantity3"></td>
+                                            <td><textarea name="" cols="15" rows="3" id="dose3"></textarea></td>
+                                            <td><textarea name="" cols="15" rows="3" id="howtouse3"></textarea></td>
+                                        </tr>
+                                        <!--4th-->
+                                        <tr>
+                                            <td><input type="text" name="drug" id="drugId4" readonly></td>
+                                            <td><input type="text" name="drug" id="drugName4" style="width:100%"></td>
+                                            <td><input type="number" name="quantity" id="quantity4"></td>
+                                            <td><textarea name="" cols="15" rows="3" id="dose4"></textarea></td>
+                                            <td><textarea name="" cols="15" rows="3" id="howtouse4"></textarea></td>
+                                        </tr>
+                                        <!--5th-->
+                                        <tr>
+                                            <td><input type="text" name="drug" id="drugId5" readonly></td>
+                                            <td><input type="text" name="drug" id="drugName5" style="width:100%"></td>
+                                            <td><input type="number" name="quantity" id="quantity5"></td>
+                                            <td><textarea name="" cols="15" rows="3" id="dose5"></textarea></td>
+                                            <td><textarea name="" cols="15" rows="3" id="howtouse5"></textarea></td>
+                                        </tr>
+                                        <!--6th-->
+                                        <tr>
+                                            <td><input type="text" name="drug" id="drugId6" readonly></td>
+                                            <td><input type="text" name="drug" id="drugName6" style="width:100%"></td>
+                                            <td><input type="number" name="quantity" id="quantity6"></td>
+                                            <td><textarea name="" cols="15" rows="3" id="dose6"></textarea></td>
+                                            <td><textarea name="" cols="15" rows="3" id="howtouse6"></textarea></td>
+                                        </tr>
+                                        <!--7th-->
+                                        <tr>
+                                            <td><input type="text" name="drug" id="drugId7" readonly></td>
+                                            <td><input type="text" name="drug" id="drugName7" style="width:100%"></td>
+                                            <td><input type="number" name="quantity" id="quantity7"></td>
+                                            <td><textarea name="" cols="15" rows="3" id="dose7"></textarea></td>
+                                            <td><textarea name="" cols="15" rows="3" id="howtouse7"></textarea></td>
+                                        </tr>
+
+                                    </thead>
+                                    <tbody id="viewTable1"></tbody>
+                                </table>
+                            </div>
+
+                            <button class="add-btn" onclick="doSave()" style="float: right">Add</button>
+
+                        </div>
+                    </div>
+
+                    <div class="container">
+                        <div id="Edit-prescription" class="tabcontent">
+                            <div class="row">
+                                <label for="">Prescription Id</label>
+                                <select id="preid" style="width: 100%"></select>>
+                                <button id="preid-btn" onclick="loadPre()">button</button>
+                            </div>
+                            <div class="row">
+                                <table id="table-id2">
+                                    <thead>
+                                        <tr>
+                                            <th>id</th>
+                                            <th>Drug Id</th>
+                                            <th>Drug name</th>
+                                            <th>Quantity</th>
+                                            <th>Dose</th>
+                                            <th>How to use</th>
+                                            <th>options</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="viewTable2"></tbody>
+                                </table>
+                            </div>
+                            <button class="update-btn" onclick="doUpdate()" style="float: right">Edit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+
+</html>
+
+<script>
+    baseURL = "http://localhost:8080"
+    // auto complete 
+    $('#drugName').autocomplete({
+        source: function (request, response) {
+            $.ajax({
+                url: baseURL + "/drugs/findbyname/",
+                headers: {
+                    'Authorization': 'bearer ' + localStorage.getItem('tonken'),
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                dataType: "json",
+                data: "name=" + request.term,
+                success: function (data) {
+                    response($.map(data, function (item) {
+                        return {
+                            labelId: item.id,
+                            labelName: item.name,
+                            value: item.name
+                        };
+                    }));
+                }
+            });
+        },
+        minLength: 1,
+        select: function (event, ui) {
+            $('#drugName').val(ui.item.labelName)
+            $('#drugId').val(ui.item.labelId)
+        }
+    })
+    // auto complete 
+    $('#drugName2').autocomplete({
+        source: function (request, response) {
+            $.ajax({
+                url: baseURL + "/drugs/findbyname/",
+                headers: {
+                    'Authorization': 'bearer ' + localStorage.getItem('tonken'),
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                dataType: "json",
+                data: "name=" + request.term,
+                success: function (data) {
+                    response($.map(data, function (item) {
+                        return {
+                            labelId: item.id,
+                            labelName: item.name,
+                            value: item.name
+                        };
+                    }));
+                }
+            });
+        },
+        minLength: 1,
+        select: function (event, ui) {
+            $('#drugName2').val(ui.item.labelName)
+            $('#drugId2').val(ui.item.labelId)
+        }
+    })
+    // auto complete 
+    $('#drugName3').autocomplete({
+        source: function (request, response) {
+            $.ajax({
+                url: baseURL + "/drugs/findbyname/",
+                headers: {
+                    'Authorization': 'bearer ' + localStorage.getItem('tonken'),
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                dataType: "json",
+                data: "name=" + request.term,
+                success: function (data) {
+                    response($.map(data, function (item) {
+                        return {
+                            labelId: item.id,
+                            labelName: item.name,
+                            value: item.name
+                        };
+                    }));
+                }
+            });
+        },
+        minLength: 1,
+        select: function (event, ui) {
+            $('#drugName3').val(ui.item.labelName)
+            $('#drugId3').val(ui.item.labelId)
+        }
+    })
+
+    // auto complete 
+    $('#drugName4').autocomplete({
+        source: function (request, response) {
+            $.ajax({
+                url: baseURL + "/drugs/findbyname/",
+                headers: {
+                    'Authorization': 'bearer ' + localStorage.getItem('tonken'),
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                dataType: "json",
+                data: "name=" + request.term,
+                success: function (data) {
+                    response($.map(data, function (item) {
+                        return {
+                            labelId: item.id,
+                            labelName: item.name,
+                            value: item.name
+                        };
+                    }));
+                }
+            });
+        },
+        minLength: 1,
+        select: function (event, ui) {
+            $('#drugName4').val(ui.item.labelName)
+            $('#drugId4').val(ui.item.labelId)
+        }
+    })
+    // auto complete 
+    $('#drugName5').autocomplete({
+        source: function (request, response) {
+            $.ajax({
+                url: baseURL + "/drugs/findbyname/",
+                headers: {
+                    'Authorization': 'bearer ' + localStorage.getItem('tonken'),
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                dataType: "json",
+                data: "name=" + request.term,
+                success: function (data) {
+                    response($.map(data, function (item) {
+                        return {
+                            labelId: item.id,
+                            labelName: item.name,
+                            value: item.name
+                        };
+                    }));
+                }
+            });
+        },
+        minLength: 1,
+        select: function (event, ui) {
+            $('#drugName5').val(ui.item.labelName)
+            $('#drugId5').val(ui.item.labelId)
+        }
+    })
+    // auto complete 
+    $('#drugName6').autocomplete({
+        source: function (request, response) {
+            $.ajax({
+                url: baseURL + "/drugs/findbyname/",
+                headers: {
+                    'Authorization': 'bearer ' + localStorage.getItem('tonken'),
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                dataType: "json",
+                data: "name=" + request.term,
+                success: function (data) {
+                    response($.map(data, function (item) {
+                        return {
+                            labelId: item.id,
+                            labelName: item.name,
+                            value: item.name
+                        };
+                    }));
+                }
+            });
+        },
+        minLength: 1,
+        select: function (event, ui) {
+            $('#drugName6').val(ui.item.labelName)
+            $('#drugId6').val(ui.item.labelId)
+        }
+    })
+    // auto complete 
+    $('#drugName7').autocomplete({
+        source: function (request, response) {
+            $.ajax({
+                url: baseURL + "/drugs/findbyname/",
+                headers: {
+                    'Authorization': 'bearer ' + localStorage.getItem('tonken'),
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                dataType: "json",
+                data: "name=" + request.term,
+                success: function (data) {
+                    response($.map(data, function (item) {
+                        return {
+                            labelId: item.id,
+                            labelName: item.name,
+                            value: item.name
+                        };
+                    }));
+                }
+            });
+        },
+        minLength: 1,
+        select: function (event, ui) {
+            $('#drugName7').val(ui.item.labelName)
+            $('#drugId7').val(ui.item.labelId)
+        }
+    })
+
+    $('#vid').autocomplete({
+        source: function (request, response) {
+            $.ajax({
+                url: baseURL + "/visits/findbypatient/",
+                headers: {
+                    'Authorization': 'bearer ' + localStorage.getItem('tonken'),
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                dataType: "json",
+                data: "id=" + request.term,
+                success: function (data) {
+                    response($.map(data, function (item) {
+                        return {
+                            labelId: item.id,
+                            labelDate: item.date,
+                            labelProblems: item.problems,
+                            labelpid: item.patient.id,
+                            labelname: item.patient.name,
+                            labelgender: item.patient.gender,
+                            labelbirthdate: item.patient.birthdate,
+                            value: item.id
+                        };
+                    }));
+                }
+            });
+        },
+        minLength: 1,
+        select: function (event, ui) {
+            $('#pid').val(ui.item.labelpid)
+            $('#name').val(ui.item.labelname)
+            $('#gender').val(ui.item.labelgender)
+            $('#birthdate').val(ui.item.labelbirthdate)
+            $('#vid').val(ui.item.labelId)
+            $('#date').val(ui.item.labelDate)
+            $('#problem').val(ui.item.labelproblems)
+        }
+    })
+
+    // $('#preid').autocomplete({
+    //     source: function (request, response) {
+    //         $.ajax({
+    //             url: baseURL + "prescribedDrugs/findbyprescription/",
+    //             dataType: "json",
+    //             data: "id=" + request.term,
+    //             success: function (data) {
+    //                 response($.map(data, function (item) {
+    //                     return {
+    //                         label: item.drug.id,
+    //                         value: item.drug.name
+    //                     };
+    //                 }));
+    //             }
+    //         });
+    //     },
+    //     minLength: 1,
+    //     select: function (event, ui) {
+    //         $('#editdrugId').val(ui.item.labelId)
+    //     }
+    // })
+
+
+
+    function doSave() {
+        var id = $('#id').val()
+        var visit = $('#vid').val()
+        if (id > 0) { //update
+            var prescr = [{
+                "drug": { "id": $('#editdrugId').val() }, "quantity": $('#editquantity').val(), "dose": $('#editdose').val(), "howToUse": $('#edithowtouse').val()
+            },
+            { "drug": { "id": $('#editdrugId2').val() }, "quantity": $('#editquantity2').val(), "dose": $('#editdose2').val(), "howToUse": $('#edithowtouse2').val() },
+            { "drug": { "id": $('#editdrugId3').val() }, "quantity": $('#editquantity3').val(), "dose": $('#editdose3').val(), "howToUse": $('#edithowtouse3').val() },
+            { "drug": { "id": $('#editdrugId4').val() }, "quantity": $('#editquantity4').val(), "dose": $('#editdose4').val(), "howToUse": $('#edithowtouse4').val() },
+            { "drug": { "id": $('#editdrugId5').val() }, "quantity": $('#editquantity5').val(), "dose": $('#editdose5').val(), "howToUse": $('#edithowtouse5').val() },
+            { "drug": { "id": $('#editdrugId6').val() }, "quantity": $('#editquantity6').val(), "dose": $('#editdose6').val(), "howToUse": $('#edithowtouse6').val() },
+            { "drug": { "id": $('#editdrugId7').val() }, "quantity": $('#editquantity7').val(), "dose": $('#editdose7').val(), "howToUse": $('#edithowtouse7').val() }]
+
+            var obj = { 'visit': { "id": visit }, 'prescribedDrugs': prescr }
+
+            fetch(baseURL + '/patients', {
+                headers: {
+                    'Authorization': 'bearer ' + localStorage.getItem('tonken'),
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                method: 'put',
+                body: JSON.stringify(obj)
+            })
+                .then(() => loadPrescriptions())
+        }
+        else { //add new
+            var did = $('#drugId').val(), did2 = $('#drugId2').val(), did3 = $('#drugId3').val(), did4 = $('#drugId4').val(), did5 = $('#drugId5').val(), did6 = $('#drugId6').val(), did7 = $('#drugId7').val()
+            // 1st
+            if (did != '') {
+                var prescr = [{
+                    "drug": { "id": $('#drugId').val() }, "quantity": $('#quantity').val(), "dose": $('#dose').val(), "howToUse": $('#howtouse').val()
+                }]
+                var pre = { 'visit': { "id": $('#vid').val() }, 'prescribedDrugs': prescr }
+
+                fetch(baseURL + '/prescriptions', {
+                    headers: {
+                        'Authorization': 'bearer ' + localStorage.getItem('tonken'),
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    method: 'post',
+                    body: JSON.stringify(pre)
+                })
+                    .then(() => loadPrescriptions())
+                alert("add prescription successfully")
+            } else
+                //2nd
+                if (did != '' && did2 != '') {
+                    var prescr =
+                        [{ "drug": { "id": $('#drugId').val() }, "quantity": $('#quantity').val(), "dose": $('#dose').val(), "howToUse": $('#howtouse').val() },
+                        { "drug": { "id": $('#drugId2').val() }, "quantity": $('#quantity2').val(), "dose": $('#dose2').val(), "howToUse": $('#howtouse2').val() }]
+
+                    var pre = { 'visit': { "id": $('#vid').val() }, 'prescribedDrugs': prescr }
+
+                    fetch(baseURL + '/prescriptions', {
+                        headers: {
+                            'Authorization': 'bearer ' + localStorage.getItem('tonken'),
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json'
+                        },
+                        method: 'post',
+                        body: JSON.stringify(pre)
+                    })
+                        .then(() => loadPrescriptions())
+                    alert("add prescription successfully")
+                }
+                else
+                    //3rd
+                    if (did != '' && did2 != '' && did3 != '') {
+                        var prescr =
+                            [{ "drug": { "id": $('#drugId').val() }, "quantity": $('#quantity').val(), "dose": $('#dose').val(), "howToUse": $('#howtouse').val() },
+                            { "drug": { "id": $('#drugId2').val() }, "quantity": $('#quantity2').val(), "dose": $('#dose2').val(), "howToUse": $('#howtouse2').val() },
+                            { "drug": { "id": $('#drugId3').val() }, "quantity": $('#quantity3').val(), "dose": $('#dose3').val(), "howToUse": $('#howtouse3').val() }]
+
+                        var pre = { 'visit': { "id": $('#vid').val() }, 'prescribedDrugs': prescr }
+
+                        fetch(baseURL + '/prescriptions', {
+                            headers: {
+                                'Authorization': 'bearer ' + localStorage.getItem('tonken'),
+                                'Content-Type': 'application/json',
+                                'Accept': 'application/json'
+                            },
+                            method: 'post',
+                            body: JSON.stringify(pre)
+                        })
+                            .then(() => loadPrescriptions())
+                        alert("add prescription successfully")
+                    }
+                    else
+                        //4th
+                        if (did != '' && did2 != '' && did3 != '' && did4 != '') {
+                            var prescr =
+                                [{ "drug": { "id": $('#drugId').val() }, "quantity": $('#quantity').val(), "dose": $('#dose').val(), "howToUse": $('#howtouse').val() },
+                                { "drug": { "id": $('#drugId2').val() }, "quantity": $('#quantity2').val(), "dose": $('#dose2').val(), "howToUse": $('#howtouse2').val() },
+                                { "drug": { "id": $('#drugId3').val() }, "quantity": $('#quantity3').val(), "dose": $('#dose3').val(), "howToUse": $('#howtouse3').val() },
+                                { "drug": { "id": $('#drugId4').val() }, "quantity": $('#quantity4').val(), "dose": $('#dose4').val(), "howToUse": $('#howtouse4').val() }]
+
+                            var pre = { 'visit': { "id": $('#vid').val() }, 'prescribedDrugs': prescr }
+
+                            fetch(baseURL + '/prescriptions', {
+                                headers: {
+                                    'Authorization': 'bearer ' + localStorage.getItem('tonken'),
+                                    'Content-Type': 'application/json',
+                                    'Accept': 'application/json'
+                                },
+                                method: 'post',
+                                body: JSON.stringify(pre)
+                            })
+                                .then(() => loadPrescriptions())
+                            alert("add prescription successfully")
+                        }
+                        //5th
+                        else
+                            if (did != '' && did2 != '' && did3 != '' && did4 != '' && did5 != '') {
+                                var prescr =
+                                    [{ "drug": { "id": $('#drugId').val() }, "quantity": $('#quantity').val(), "dose": $('#dose').val(), "howToUse": $('#howtouse').val() },
+                                    { "drug": { "id": $('#drugId2').val() }, "quantity": $('#quantity2').val(), "dose": $('#dose2').val(), "howToUse": $('#howtouse2').val() },
+                                    { "drug": { "id": $('#drugId3').val() }, "quantity": $('#quantity3').val(), "dose": $('#dose3').val(), "howToUse": $('#howtouse3').val() },
+                                    { "drug": { "id": $('#drugId4').val() }, "quantity": $('#quantity4').val(), "dose": $('#dose4').val(), "howToUse": $('#howtouse4').val() },
+                                    { "drug": { "id": $('#drugId5').val() }, "quantity": $('#quantity5').val(), "dose": $('#dose5').val(), "howToUse": $('#howtouse5').val() }]
+
+                                var pre = { 'visit': { "id": $('#vid').val() }, 'prescribedDrugs': prescr }
+
+                                fetch(baseURL + '/prescriptions', {
+                                    headers: {
+                                        'Authorization': 'bearer ' + localStorage.getItem('tonken'),
+                                        'Content-Type': 'application/json',
+                                        'Accept': 'application/json'
+                                    },
+                                    method: 'post',
+                                    body: JSON.stringify(pre)
+                                })
+                                    .then(() => loadPrescriptions())
+                                alert("add prescription successfully")
+                            }
+                            //6th
+                            else
+                                if (did != '' && did2 != '' && did3 != '' && did4 != '' && did5 != '' && did6 != '') {
+                                    var prescr =
+                                        [{ "drug": { "id": $('#drugId').val() }, "quantity": $('#quantity').val(), "dose": $('#dose').val(), "howToUse": $('#howtouse').val() },
+                                        { "drug": { "id": $('#drugId2').val() }, "quantity": $('#quantity2').val(), "dose": $('#dose2').val(), "howToUse": $('#howtouse2').val() },
+                                        { "drug": { "id": $('#drugId3').val() }, "quantity": $('#quantity3').val(), "dose": $('#dose3').val(), "howToUse": $('#howtouse3').val() },
+                                        { "drug": { "id": $('#drugId4').val() }, "quantity": $('#quantity4').val(), "dose": $('#dose4').val(), "howToUse": $('#howtouse4').val() },
+                                        { "drug": { "id": $('#drugId5').val() }, "quantity": $('#quantity5').val(), "dose": $('#dose5').val(), "howToUse": $('#howtouse5').val() },
+                                        { "drug": { "id": $('#drugId6').val() }, "quantity": $('#quantity6').val(), "dose": $('#dose6').val(), "howToUse": $('#howtouse6').val() }]
+
+                                    var pre = { 'visit': { "id": $('#vid').val() }, 'prescribedDrugs': prescr }
+
+                                    fetch(baseURL + '/prescriptions', {
+                                        headers: {
+                                            'Authorization': 'bearer ' + localStorage.getItem('tonken'),
+                                            'Content-Type': 'application/json',
+                                            'Accept': 'application/json'
+                                        },
+                                        method: 'post',
+                                        body: JSON.stringify(pre)
+                                    })
+                                        .then(() => loadPrescriptions())
+                                    alert("add prescription successfully")
+                                }
+                                //7th
+                                else
+                                    if (did != '' && did2 != '' && did3 != '' && did4 != '' && did5 != '' && did6 != '' && did7 != '') {
+                                        var prescr =
+                                            [{ "drug": { "id": $('#drugId').val() }, "quantity": $('#quantity').val(), "dose": $('#dose').val(), "howToUse": $('#howtouse').val() },
+                                            { "drug": { "id": $('#drugId2').val() }, "quantity": $('#quantity2').val(), "dose": $('#dose2').val(), "howToUse": $('#howtouse2').val() },
+                                            { "drug": { "id": $('#drugId3').val() }, "quantity": $('#quantity3').val(), "dose": $('#dose3').val(), "howToUse": $('#howtouse3').val() },
+                                            { "drug": { "id": $('#drugId4').val() }, "quantity": $('#quantity4').val(), "dose": $('#dose4').val(), "howToUse": $('#howtouse4').val() },
+                                            { "drug": { "id": $('#drugId5').val() }, "quantity": $('#quantity5').val(), "dose": $('#dose5').val(), "howToUse": $('#howtouse5').val() },
+                                            { "drug": { "id": $('#drugId6').val() }, "quantity": $('#quantity6').val(), "dose": $('#dose6').val(), "howToUse": $('#howtouse6').val() },
+                                            { "drug": { "id": $('#drugId7').val() }, "quantity": $('#quantity7').val(), "dose": $('#dose7').val(), "howToUse": $('#howtouse7').val() }]
+
+                                        var pre = { 'visit': { "id": $('#vid').val() }, 'prescribedDrugs': prescr }
+
+                                        fetch(baseURL + '/prescriptions', {
+                                            headers: {
+                                                'Authorization': 'bearer ' + localStorage.getItem('tonken'),
+                                                'Content-Type': 'application/json',
+                                                'Accept': 'application/json'
+                                            },
+                                            method: 'post',
+                                            body: JSON.stringify(pre)
+                                        })
+                                            .then(() => loadPrescriptions())
+                                        alert("add prescription successfully")
+                                    }
+
+        }
+    }
+
+    function loadPrescriptions() {
+        $('#viewTable').html("")
+        fetch(baseURL + "/prescriptions", {
+            headers: {
+                'Authorization': 'bearer ' + localStorage.getItem('tonken'),
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+        })
+            .then((res) => res.json())
+            .then((json) => {
+                for (let i = 0; i < json.length; i++) {
+
+                    var prescription = `
+                <tr> 
+                    <td> ${json[i].id}</td>
+                    <td> <button class="delete-btn" onclick='doDelete1(${json[i].id})'><i class="fa fa-trash"></i>Delete</button>
+                </tr>`
+                    $("#viewTable").append(prescription)
+                }
+            })
+    }
+    loadPrescriptions()
+
+
+    function loadpresc() {
+        $('#viewTable').html("")
+        fetch(baseURL + "/prescriptions", {
+            headers: {
+                'Authorization': 'bearer ' + localStorage.getItem('tonken'),
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+        })
+            .then((res) => res.json())
+            .then((json) => {
+                for (let i = 0; i < json.length; i++) {
+                    var patient = `
+                    <option id="preOption" value=${json[i].id}>${json[i].id}</option>
+                   `
+                    $("#preid").append(patient)
+                }
+            })
+    }
+    loadpresc()
+
+    // This is using for getting the prescription detail
+    function loadPre() {
+        $('#viewTable2').html("")
+        var e = document.getElementById("preid").value
+        fetch(baseURL + "/prescribedDrugs/findbyprescription/?id=" + e, {
+            headers: {
+                'Authorization': 'bearer ' + localStorage.getItem('tonken'),
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+        })
+            .then((res) => res.json())
+            .then((json) => {
+                for (let i = 0; i < json.length; i++) {
+
+                    if (i == 0) {
+                        var patient = `
+                <tr> 
+                    <td> <input type="text" id="editId" class="form-control" value="${json[0].id}" readonly></td>
+                    <td> <input type="text" id="editdrugId" class="form-control" value="${json[0].drug.id}" readonly></td>  
+                    <td> <input type="text" id="editdrugname" style="width:100%" class="form-control" value="${json[0].drug.name}"></td>
+                    <td> <input type="text" id="editquantity" style="width:100%" class="form-control" value="${json[0].quantity}"></td>
+                    <td> <input type="text" id="editdose" style="width:100%" class="form-control" value="${json[0].dose}"></td>  
+                    <td> <input type="text" id="edithowtouse" style="width:100%" class="form-control" value="${json[0].howToUse}"></td> 
+                    <td> <button class="delete-btn" onclick='doDelete(${json[i].id})'><i class="fa fa-trash"></i>Delete</button></td>
+                </tr>
+                
+                `
+                        $("#viewTable2").append(patient)
+                    }
+                    if (i == 1) {
+                        var patient = `
+                <tr> 
+                    <td> <input type="text" id="editId2" class="form-control" value="${json[1].id}" readonly></td>
+                    <td> <input type="text" id="editdrugId2" class="form-control" value="${json[1].drug.id}" readonly></td>   
+                    <td> <input type="text" id="editdrugname2" style="width:100%" class="form-control" value="${json[1].drug.name}"></td>
+                    <td> <input type="text" id="editquantity2" style="width:100%" class="form-control" value="${json[1].quantity}"></td>
+                    <td> <input type="text" id="editdose2" style="width:100%" class="form-control" value="${json[1].dose}"></td>  
+                    <td> <input type="text" id="edithowtouse2" style="width:100%" class="form-control" value="${json[1].howToUse}"></td> 
+                    <td> <button class="delete-btn" onclick='doDelete(${json[i].id})'><i class="fa fa-trash"></i>Delete</button></td>
+                </tr>
+                
+                `
+                        $("#viewTable2").append(patient)
+                    }
+                    if (i == 2) {
+                        var patient = `
+                <tr> 
+                    <td> <input type="text" id="editId3" class="form-control" value="${json[2].id}" readonly></td>
+                    <td> <input type="text" id="editdrugId3" class="form-control" value="${json[2].drug.id}" readonly></td>   
+                    <td> <input type="text" id="editdrugname3" style="width:100%" class="form-control" value="${json[2].drug.name}"></td>
+                    <td> <input type="text" id="editquantity3" style="width:100%" class="form-control" value="${json[2].quantity}"></td>
+                    <td> <input type="text" id="editdose3" style="width:100%" class="form-control" value="${json[2].dose}"></td>  
+                    <td> <input type="text" id="edithowtouse3" style="width:100%" class="form-control" value="${json[2].howToUse}"></td> 
+                    <td> <button class="delete-btn" onclick='doDelete(${json[i].id})'><i class="fa fa-trash"></i>Delete</button></td>
+                </tr>
+                
+                `
+                        $("#viewTable2").append(patient)
+                    }
+                    if (i == 3) {
+                        var patient = `
+                <tr> 
+                    <td> <input type="text" id="editId4" class="form-control" value="${json[3].id}" readonly></td>
+                    <td> <input type="text" id="editdrugId4" class="form-control" value="${json[3].drug.id}" readonly></td>   
+                    <td> <input type="text" id="editdrugname4" style="width:100%" class="form-control" value="${json[3].drug.name}"></td>
+                    <td> <input type="text" id="editquantity4" style="width:100%" class="form-control" value="${json[3].quantity}"></td>
+                    <td> <input type="text" id="editdose4" style="width:100%" class="form-control" value="${json[3].dose}"></td>  
+                    <td> <input type="text" id="edithowtouse4" style="width:100%" class="form-control" value="${json[3].howToUse}"></td> 
+                    <td> <button class="delete-btn" onclick='doDelete(${json[i].id})'><i class="fa fa-trash"></i>Delete</button></td>
+                </tr>
+                
+                `
+                        $("#viewTable2").append(patient)
+                    }
+                    if (i == 4) {
+                        var patient = `
+                <tr> 
+                    <td> <input type="text" id="editId5" class="form-control" value="${json[4].id}" readonly></td>
+                    <td> <input type="text" id="editdrugId5" class="form-control" value="${json[4].drug.id}" readonly></td>   
+                    <td> <input type="text" id="editdrugname5" style="width:100%" class="form-control" value="${json[4].drug.name}"></td>
+                    <td> <input type="text" id="editquantity5" style="width:100%" class="form-control" value="${json[4].quantity}"></td>
+                    <td> <input type="text" id="editdose5" style="width:100%" class="form-control" value="${json[4].dose}"></td>  
+                    <td> <input type="text" id="edithowtouse5" style="width:100%" class="form-control" value="${json[4].howToUse}"></td> 
+                    <td> <button class="delete-btn" onclick='doDelete(${json[i].id})'><i class="fa fa-trash"></i>Delete</button></td>
+                </tr>
+                
+                `
+                        $("#viewTable2").append(patient)
+                    }
+                    if (i == 5) {
+                        var patient = `
+                <tr> 
+                    <td> <input type="text" id="editId6" class="form-control" value="${json[5].id}" readonly></td>
+                    <td> <input type="text" id="editdrugId6" class="form-control" value="${json[5].drug.id}" readonly></td>   
+                    <td> <input type="text" id="ueditdrugname6" style="width:100%" class="form-control" value="${json[5].drug.name}"></td>
+                    <td> <input type="text" id="editquantity6" style="width:100%" class="form-control" value="${json[5].quantity}"></td>
+                    <td> <input type="text" id="editdose6" style="width:100%" class="form-control" value="${json[5].dose}"></td>  
+                    <td> <input type="text" id="edithowtouse6" style="width:100%" class="form-control" value="${json[5].howToUse}"></td> 
+                    <td> <button class="delete-btn" onclick='doDelete(${json[i].id})'><i class="fa fa-trash"></i>Delete</button></td>
+                </tr>
+                
+                `
+                        $("#viewTable2").append(patient)
+                    }
+                    if (i == 6) {
+                        var patient = `
+                <tr> 
+                    <td> <input type="text" id="editId7" class="form-control" value="${json[6].id}" readonly></td>
+                    <td> <input type="text" id="editdrugId7" class="form-control" value="${json[6].drug.id}" readonly></td>   
+                    <td> <input type="text" id="editdrugname7" style="width:100%" class="form-control" value="${json[6].drug.name}"></td>
+                    <td> <input type="text" id="editquantity7" style="width:100%" class="form-control" value="${json[6].quantity}"></td>
+                    <td> <input type="text" id="editdose7" style="width:100%" class="form-control" value="${json[6].dose}"></td>  
+                    <td> <input type="text" id="edithowtouse7" style="width:100%" class="form-control" value="${json[6].howToUse}"></td> 
+                    <td> <button class="delete-btn" onclick='doDelete(${json[i].id})'><i class="fa fa-trash"></i>Delete</button></td>
+                </tr>
+                
+                `
+                        $("#viewTable2").append(patient)
+                    }
+                }
+            })
+    }
+
+    //loadPre()
+
+
+    function doUpdate() {
+        var e = document.getElementById("preid").value
+        if (id > 0) { //update
+            var did = $('#editdrugId').val(), did2 = $('#editdrugId2').val(), did3 = $('#editdrugId3').val(), did4 = $('#editdrugId4').val(), did5 = $('#editdrugId5').val(), did6 = $('#editdrugId6').val(), did7 = $('#editdrugId7').val()
+            // 1st
+            if (did != '') {
+                var prescr = [{ "id": $('#editId').val(), "drug": { "id": $('#editdrugId').val() }, "quantity": $('#editquantity').val(), "dose": $('#editdose').val(), "howToUse": $('#edithowtouse').val() }]
+
+                var pre = { "id": e, "prescribedDrugs": prescr }
+                console.log(pre)
+                fetch(baseURL + '/prescriptions', {
+                    headers: {
+                        'Authorization': 'bearer ' + localStorage.getItem('tonken'),
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    method: 'put',
+                    body: JSON.stringify(pre)
+                })
+                    .then(() => loadPrescriptions())
+                alert("add prescription successfully")
+            } else
+                //2nd
+                if (did != '' && did2 != '') {
+                    var prescr = [
+                        { "id": $('#editId').val(), "drug": { "id": $('#editdrugId').val() }, "quantity": $('#editquantity').val(), "dose": $('#editdose').val(), "howToUse": $('#edithowtouse').val() },
+                        { "id": $('#editId2').val(), "drug": { "id": $('#editdrugId2').val() }, "quantity": $('#editquantity2').val(), "dose": $('#editdose2').val(), "howToUse": $('#edithowtouse2').val() }]
+
+                    var pre = { 'id': id, 'prescribedDrugs': prescr }
+
+                    fetch(baseURL + '/prescribedDrugs', {
+                        headers: {
+                            'Authorization': 'bearer ' + localStorage.getItem('tonken'),
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json'
+                        },
+                        method: 'put',
+                        body: JSON.stringify(pre)
+                    })
+                        .then(() => loadPrescriptions())
+                    alert("add prescription successfully")
+                }
+                else
+                    //3rd
+                    if (did != '' && did2 != '' && did3 != '') {
+                        var prescr = [
+                            { "id": $('#editId').val(), "drug": { "id": $('#editdrugId').val() }, "quantity": $('#editquantity').val(), "dose": $('#editdose').val(), "howToUse": $('#edithowtouse').val() },
+                            { "id": $('#editId2').val(), "drug": { "id": $('#editdrugId2').val() }, "quantity": $('#editquantity2').val(), "dose": $('#editdose2').val(), "howToUse": $('#edithowtouse2').val() },
+                            { "id": $('#editId3').val(), "drug": { "id": $('#editdrugId3').val() }, "quantity": $('#editquantity3').val(), "dose": $('#editdose3').val(), "howToUse": $('#edithowtouse3').val() }]
+
+                        var pre = { 'id': id, 'prescribedDrugs': prescr }
+
+                        fetch(baseURL + '/prescribedDrugs', {
+                            headers: {
+                                'Authorization': 'bearer ' + localStorage.getItem('tonken'),
+                                'Content-Type': 'application/json',
+                                'Accept': 'application/json'
+                            },
+                            method: 'put',
+                            body: JSON.stringify(pre)
+                        })
+                            .then(() => loadPrescriptions())
+                        alert("add prescription successfully")
+                    }
+                    else
+                        //4th
+                        if (did != '' && did2 != '' && did3 != '' && did4 != '') {
+                            var prescr = [
+                                { "id": $('#editId').val(), "drug": { "id": $('#editdrugId').val() }, "quantity": $('#editquantity').val(), "dose": $('#editdose').val(), "howToUse": $('#edithowtouse').val() },
+                                { "id": $('#editId2').val(), "drug": { "id": $('#editdrugId2').val() }, "quantity": $('#editquantity2').val(), "dose": $('#editdose2').val(), "howToUse": $('#edithowtouse2').val() },
+                                { "id": $('#editId3').val(), "drug": { "id": $('#editdrugId3').val() }, "quantity": $('#editquantity3').val(), "dose": $('#editdose3').val(), "howToUse": $('#edithowtouse3').val() },
+                                { "id": $('#editId4').val(), "drug": { "id": $('#editdrugId4').val() }, "quantity": $('#editquantity4').val(), "dose": $('#editdose4').val(), "howToUse": $('#edithowtouse4').val() }]
+                            var pre = { 'id': id, 'prescribedDrugs': prescr }
+
+                            fetch(baseURL + '/prescribedDrugs', {
+                                headers: {
+                                    'Authorization': 'bearer ' + localStorage.getItem('tonken'),
+                                    'Content-Type': 'application/json',
+                                    'Accept': 'application/json'
+                                },
+                                method: 'put',
+                                body: JSON.stringify(pre)
+                            })
+                                .then(() => loadPrescriptions())
+                            alert("add prescription successfully")
+                        }
+                        else
+                            //5th
+                            if (did != '' && did2 != '' && did3 != '' && did4 != '' && did5 != '') {
+                                var prescr = [
+                                    { "id": $('#editId').val(), "drug": { "id": $('#editdrugId').val() }, "quantity": $('#editquantity').val(), "dose": $('#editdose').val(), "howToUse": $('#edithowtouse').val() },
+                                    { "id": $('#editId2').val(), "drug": { "id": $('#editdrugId2').val() }, "quantity": $('#editquantity2').val(), "dose": $('#editdose2').val(), "howToUse": $('#edithowtouse2').val() },
+                                    { "id": $('#editId3').val(), "drug": { "id": $('#editdrugId3').val() }, "quantity": $('#editquantity3').val(), "dose": $('#editdose3').val(), "howToUse": $('#edithowtouse3').val() },
+                                    { "id": $('#editId4').val(), "drug": { "id": $('#editdrugId4').val() }, "quantity": $('#editquantity4').val(), "dose": $('#editdose4').val(), "howToUse": $('#edithowtouse4').val() },
+                                    { "id": $('#editId5').val(), "drug": { "id": $('#editdrugId5').val() }, "quantity": $('#editquantity5').val(), "dose": $('#editdose5').val(), "howToUse": $('#edithowtouse5').val() }]
+
+                                var pre = { 'id': id, 'prescribedDrugs': prescr }
+
+                                fetch(baseURL + '/prescribedDrugs', {
+                                    headers: {
+                                        'Authorization': 'bearer ' + localStorage.getItem('tonken'),
+                                        'Content-Type': 'application/json',
+                                        'Accept': 'application/json'
+                                    },
+                                    method: 'put',
+                                    body: JSON.stringify(pre)
+                                })
+                                    .then(() => loadPrescriptions())
+                                alert("add prescription successfully")
+                            }
+                            else
+                                //6th
+                                if (did != '' && did2 != '' && did3 != '' && did4 != '' && did5 != '' && did6 != '') {
+                                    var prescr = [
+                                        { "id": $('#editId').val(), "drug": { "id": $('#editdrugId').val() }, "quantity": $('#editquantity').val(), "dose": $('#editdose').val(), "howToUse": $('#edithowtouse').val() },
+                                        { "id": $('#editId2').val(), "drug": { "id": $('#editdrugId2').val() }, "quantity": $('#editquantity2').val(), "dose": $('#editdose2').val(), "howToUse": $('#edithowtouse2').val() },
+                                        { "id": $('#editId3').val(), "drug": { "id": $('#editdrugId3').val() }, "quantity": $('#editquantity3').val(), "dose": $('#editdose3').val(), "howToUse": $('#edithowtouse3').val() },
+                                        { "id": $('#editId4').val(), "drug": { "id": $('#editdrugId4').val() }, "quantity": $('#editquantity4').val(), "dose": $('#editdose4').val(), "howToUse": $('#edithowtouse4').val() },
+                                        { "id": $('#editId5').val(), "drug": { "id": $('#editdrugId5').val() }, "quantity": $('#editquantity5').val(), "dose": $('#editdose5').val(), "howToUse": $('#edithowtouse5').val() },
+                                        { "id": $('#editId6').val(), "drug": { "id": $('#editdrugId6').val() }, "quantity": $('#editquantity6').val(), "dose": $('#editdose6').val(), "howToUse": $('#edithowtouse6').val() }]
+
+                                    var pre = { 'id': id, 'prescribedDrugs': prescr }
+
+                                    fetch(baseURL + '/prescribedDrugs', {
+                                        headers: {
+                                            'Authorization': 'bearer ' + localStorage.getItem('tonken'),
+                                            'Content-Type': 'application/json',
+                                            'Accept': 'application/json'
+                                        },
+                                        method: 'put',
+                                        body: JSON.stringify(pre)
+                                    })
+                                        .then(() => loadPrescriptions())
+                                    alert("add prescription successfully")
+                                }
+                                else
+                                    //7th
+                                    if (did != '' && did2 != '' && did3 != '' && did4 != '' && did5 != '' && did6 != '' && did7 != '') {
+                                        var prescr = [
+                                            { "id": $('#editId').val(), "drug": { "id": $('#editdrugId').val() }, "quantity": $('#editquantity').val(), "dose": $('#editdose').val(), "howToUse": $('#edithowtouse').val() },
+                                            { "id": $('#editId2').val(), "drug": { "id": $('#editdrugId2').val() }, "quantity": $('#editquantity2').val(), "dose": $('#editdose2').val(), "howToUse": $('#edithowtouse2').val() },
+                                            { "id": $('#editId3').val(), "drug": { "id": $('#editdrugId3').val() }, "quantity": $('#editquantity3').val(), "dose": $('#editdose3').val(), "howToUse": $('#edithowtouse3').val() },
+                                            { "id": $('#editId4').val(), "drug": { "id": $('#editdrugId4').val() }, "quantity": $('#editquantity4').val(), "dose": $('#editdose4').val(), "howToUse": $('#edithowtouse4').val() },
+                                            { "id": $('#editId5').val(), "drug": { "id": $('#editdrugId5').val() }, "quantity": $('#editquantity5').val(), "dose": $('#editdose5').val(), "howToUse": $('#edithowtouse5').val() },
+                                            { "id": $('#editId6').val(), "drug": { "id": $('#editdrugId6').val() }, "quantity": $('#editquantity6').val(), "dose": $('#editdose6').val(), "howToUse": $('#edithowtouse6').val() },
+                                            { "id": $('#editId7').val(), "drug": { "id": $('#editdrugId7').val() }, "quantity": $('#editquantity7').val(), "dose": $('#editdose7').val(), "howToUse": $('#edithowtouse7').val() }]
+
+                                        var pre = { 'id': id, 'prescribedDrugs': prescr }
+
+                                        fetch(baseURL + '/prescribedDrugs', {
+                                            headers: {
+                                                'Authorization': 'bearer ' + localStorage.getItem('tonken'),
+                                                'Content-Type': 'application/json',
+                                                'Accept': 'application/json'
+                                            },
+                                            method: 'put',
+                                            body: JSON.stringify(pre)
+                                        })
+                                            .then(() => loadPrescriptions())
+                                        alert("add prescription successfully")
+                                    }
+        }
+    }
+
+    function doEdit(id, howToUse, quantity, dose) {
+        $('#id').val(id)
+        $('#updateName').val(howToUse)
+        $('#updateBirthdate').val(quantity)
+        $('#updateGender').val(dose)
+        $('#updateAddress').val(address)
+    }
+
+    // This is deleted prescription
+    function doDelete1(id) {
+        if (confirm('Do you want to delete?')) {
+            fetch(baseURL + '/prescriptions/' + id, {
+                headers: {
+                    'Authorization': 'bearer ' + localStorage.getItem('tonken'),
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                method: 'delete'
+            })
+                .then(() => loadPrescriptions())
+        }
+    }
+
+    // This is deleted prescription detail
+    function doDelete(id) {
+        if (confirm('Do you want to delete?')) {
+            fetch(baseURL + '/prescribedDrugs/' + id, {
+                headers: {
+                    'Authorization': 'bearer ' + localStorage.getItem('tonken'),
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                method: 'delete'
+            })
+                .then(() => loadPrescriptions())
+        }
+    }
+
+    // loadPre()
+
+    //This is using for tab bar
+    function openPage(pageName, elmnt, color) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablink");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].style.backgroundColor = "";
+        }
+        document.getElementById(pageName).style.display = "block";
+        elmnt.style.backgroundColor = color
+    }
+
+    // Get the element with id="defaultOpen" and click on it
+    document.getElementById("defaultOpen").click();
+</script>

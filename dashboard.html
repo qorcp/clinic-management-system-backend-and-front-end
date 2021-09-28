@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css'
+        integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <style>
+        .row {
+            border: 1px solid gray;
+        }
+
+        /*This is setting to vertical navigation bar*/
+        .vertical-menu {
+            width: 100%;
+            height: 100%;
+            background-color: #62AAB3;
+            font-weight: bold;
+        }
+
+        .vertical-menu a {
+            color: black;
+            display: block;
+            border-bottom: 1px dotted gray;
+            padding: 10px 0 10px 20px;
+            text-decoration: none;
+        }
+
+        .vertical-menu li {
+            list-style: none;
+        }
+
+        .vertical-menu a:hover {
+            background-color: rgba(121, 165, 162, 1.00);
+        }
+
+        .vertical-menu a.active {
+            background-color: #007DB4;
+            color: white;
+        }
+
+        #patient-management {
+            padding: 10px;
+        }
+
+        /* This is information icon*/
+        #info-circle {
+            margin-right: 10px;
+            margin-left: 20px
+        }
+
+        
+        .card {
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            transition: 0.3s;
+            width: 100%;
+            height: 100%
+        }
+
+        .card:hover {
+            box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        .photo {
+            height: 200px;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-flued">
+        <h1 style="text-align: center; margin-top:20px;">Hospital management system</h1>
+    </div>
+
+    <!--vertical nav bar-->
+    <div class="container-flued">
+        <div class="row">
+            <div class="col-sm-2 px-0">
+                <div class="vertical-menu">
+                    <div class="vertical-menu-ul">
+                        <li><a class="active" href="dashboard.html"><i class="fa fa-bars"
+                                    style="margin-right:10px;"></i>Dashboard</a></li>
+                        <li><a href="Patient.html"><i class="fa fa-id-card-alt"
+                                    style="margin-right:10px;"></i>Patient</a></li>
+                        <li><a href="visit-newpatient.html"><i class="fa fa-user"
+                                    style="margin-right:10px;"></i>Visit</a></li>
+                        <li><a href="prescription.html"><i class="fas fa-file-prescription"
+                                    style="margin-right:10px;"></i> Prescription</a></li>
+                        <li><a href="drugs.html"><i class="fas fa-pills" style="margin-right:10px;"></i>Drug</a></li>
+                        <li><a href="medicalService.html"><i class="fas fa-x-ray" style="margin-right:10px;"></i>Medical
+                                service</a></li>
+                        <li><a href="disease.html"><i class="fas fa-biohazard" style="margin-right:10px;"></i>ICD</a>
+                        </li>
+                    </div>
+                </div>
+            </div>
+
+            <!--inside main row-->
+            <div class="col-sm-10">
+                <div class="row">
+                    <h1 id="patient-management"><i class="fa fa-info-circle" id="info-circle"></i>Dash board
+                    </h1>
+                </div>
+                <div class="row">
+                    <div class="col-sm-3" style="margin-left:10%;">
+                        <div class="card">
+                            <a href="Patient.html">
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHGeGxYswofRgg16FXLggpsJ6N9w8Z52iDmu-ezCXF6FM6cYzKQg"
+                                    alt="Avatar" class="photo">
+                                <div class="container">
+                                    <h4><b>Patient</b></h4>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="card">
+                            <a href="visit-newpatient.html">
+                                <img src="https://www.manateememorial.com/sites/manateememorial.com/files/images/banner/visitor-information_0.jpg"
+                                    alt="Avatar" class="photo">
+                                <div class="container">
+                                    <h4><b>Visit</b></h4>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="card">
+                            <a href="prescription.html">
+                                <img src="data:image/png;base64,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"
+                                    alt="Avatar" class="photo">
+                                <div class="container">
+                                    <h4><b>Prescription</b></h4>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row" style="margin-top:5%; margin-left:10%;">
+                    <div class="col-sm-3">
+                        <div class="card">
+                            <a href="drugs.html">
+                                <img src="https://fortunedotcom.files.wordpress.com/2018/09/civica-rx-generic-drug-nonprofit-e1536264877842.jpg"
+                                    alt="Avatar" class="photo">
+                                <div class="container">
+                                    <h4><b>Drug</b></h4>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-3">
+                        <div class="card">
+                            <a href="medicalService.html">
+                                <img src="https://productimages.withfloats.com/actual/5b694f2e111b850503ad7db9.jpg"
+                                    alt="Avatar" class="photo">
+                                <div class="container">
+                                    <h4><b>medicalService</b></h4>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="card">
+                            <a href="disease.html">
+                                <img src="https://www.elitecme.com/wp-content/uploads/2019/02/icd-491350932_900x.jpg"
+                                    alt="Avatar" class="photo">
+                                <div class="container">
+                                    <h4><b>ICD</b></h4>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="card bg-primary">
+                        <div class="card-body text-center">
+                            <img class="card-img-top" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHGeGxYswofRgg16FXLggpsJ6N9w8Z52iDmu-ezCXF6FM6cYzKQg" width="300px" height="300px" alt="Card image">
+                            <h2 class="card-text">Combo 1</h2>
+                            <p> 2 pieces, 1 drinks</p>
+                            <p>150.000 vnd</p>
+                            <a href="#click" class="btn btn-primary" data-toggle="collapse" id="buy1"> Buy</a>
+                            <div id="click" class="collapse" >
+                                Quantity <input type="number" name="quantity" id="quantity"> <br />
+                                <button id="buy1">delivery</button>
+                            </div>
+                        </div>
+                        <div class="card-body text-center">
+                                <img class="card-img-top" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHGeGxYswofRgg16FXLggpsJ6N9w8Z52iDmu-ezCXF6FM6cYzKQg" width="300px" height="300px" alt="Card image">
+                                <h2 class="card-text">Combo 1</h2>
+                                <p> 2 pieces, 1 drinks</p>
+                                <p>150.000 vnd</p>
+                                <a href="#click" class="btn btn-primary" data-toggle="collapse" id="buy1"> Buy</a>
+                                <div id="click" class="collapse" >
+                                    Quantity <input type="number" name="quantity" id="quantity"> <br />
+                                    <button id="buy1">delivery</button>
+                                </div>
+                            </div>
+                            <div class="card-body text-center">
+                                    <img class="card-img-top" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHGeGxYswofRgg16FXLggpsJ6N9w8Z52iDmu-ezCXF6FM6cYzKQg" width="300px" height="300px" alt="Card image">
+                                    <h2 class="card-text">Combo 1</h2>
+                                    <p> 2 pieces, 1 drinks</p>
+                                    <p>150.000 vnd</p>
+                                    <a href="#click" class="btn btn-primary" data-toggle="collapse" id="buy1"> Buy</a>
+                                    <div id="click" class="collapse" >
+                                        Quantity <input type="number" name="quantity" id="quantity"> <br />
+                                        <button id="buy1">delivery</button>
+                                    </div>
+                                </div>
+                                <div class="card-body text-center">
+                                        <img class="card-img-top" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHGeGxYswofRgg16FXLggpsJ6N9w8Z52iDmu-ezCXF6FM6cYzKQg" width="300px" height="300px" alt="Card image">
+                                        <h2 class="card-text">Combo 1</h2>
+                                        <p> 2 pieces, 1 drinks</p>
+                                        <p>150.000 vnd</p>
+                                        <a href="#click" class="btn btn-primary" data-toggle="collapse" id="buy1"> Buy</a>
+                                        <div id="click" class="collapse" >
+                                            Quantity <input type="number" name="quantity" id="quantity"> <br />
+                                            <button id="buy1">delivery</button>
+                                        </div>
+                                    </div>
+                                    <div class="card-body text-center">
+                                            <img class="card-img-top" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHGeGxYswofRgg16FXLggpsJ6N9w8Z52iDmu-ezCXF6FM6cYzKQg" width="300px" height="300px" alt="Card image">
+                                            <h2 class="card-text">Combo 1</h2>
+                                            <p> 2 pieces, 1 drinks</p>
+                                            <p>150.000 vnd</p>
+                                            <a href="#click" class="btn btn-primary" data-toggle="collapse" id="buy1"> Buy</a>
+                                            <div id="click" class="collapse" >
+                                                Quantity <input type="number" name="quantity" id="quantity"> <br />
+                                                <button id="buy1">delivery</button>
+                                            </div>
+                                        </div>
+                                        <div class="card-body text-center">
+                                                <img class="card-img-top" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHGeGxYswofRgg16FXLggpsJ6N9w8Z52iDmu-ezCXF6FM6cYzKQg" width="300px" height="300px" alt="Card image">
+                                                <h2 class="card-text">Combo 1</h2>
+                                                <p> 2 pieces, 1 drinks</p>
+                                                <p>150.000 vnd</p>
+                                                <a href="#click" class="btn btn-primary" data-toggle="collapse" id="buy1"> Buy</a>
+                                                <div id="click" class="collapse" >
+                                                    Quantity <input type="number" name="quantity" id="quantity"> <br />
+                                                    <button id="buy1">delivery</button>
+                                                </div>
+                                            </div>
+                    </div> -->
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+
+<script>
+
+</script>

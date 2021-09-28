@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Hospital Management System</title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css'
+        integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <style>
+        .row {
+            border: 1px solid gray;
+        }
+
+        label {
+            color: black;
+        }
+
+        /*This is setting to vertical navigation bar*/
+        .vertical-menu {
+            width: 100%;
+            height: 100%;
+            background-color: #62AAB3;
+            font-weight: bold;
+        }
+
+        .vertical-menu a {
+            color: black;
+            display: block;
+            border-bottom: 1px dotted gray;
+            padding: 10px 0 10px 20px;
+            text-decoration: none;
+        }
+
+        .vertical-menu li {
+            list-style: none;
+        }
+
+        .vertical-menu a:hover {
+            background-color: rgba(121, 165, 162, 1.00);
+        }
+
+        .vertical-menu a.active {
+            background-color: #007DB4;
+            color: white;
+        }
+
+        #Visit-management {
+            padding: 10px;
+        }
+
+        /* This is information icon*/
+        #info-circle {
+            margin-right: 10px;
+            margin-left: 20px
+        }
+
+        #tab {
+            background-color: #62AAB3;
+        }
+
+        /* Style tab links */
+        .tablink {
+            background-color: #62AAB3;
+            color: white;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            font-size: 17px;
+            width: 25%;
+            font-weight: bold;
+        }
+
+        .tablink:hover {
+            background-color: #777;
+        }
+
+        /* Style the tab content (and add height:100% for full page content) */
+        .tabcontent {
+            color: white;
+            display: none;
+            padding: 10px 10px;
+            height: 100%;
+            width: 100%;
+            border-left: 2px solid gray;
+            border-right: 2px solid gray;
+        }
+
+        #Visit-list,
+        #Add-visit-newPatient,
+        #Add-visit-returningPatient {
+            background-color: white;
+        }
+
+        input[type=text],
+        [type=date],
+        [type=time],
+        [type=number],
+        #gender,
+        #idicd,
+        #icd,
+        #labtest {
+            width: 25%;
+            margin: 10px 10px 20px;
+            display: inline-block;
+            border: 1px solid gray;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+            margin: 10px 10px 10px 10px;
+            size: 5px;
+        }
+
+        #searchInput {
+            background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2C5utsVsva732YCyf85HpDpcNEBp_C3BqzI_2ojRzcU6QOoeW');
+            background-size: 20px 23px;
+            background-position: 10px 10px;
+            background-repeat: no-repeat;
+            width: 30%;
+            font-size: 16px;
+            padding: 12px 20px 12px 40px;
+            border: 1px solid gray;
+            margin-bottom: 12px;
+            float: right;
+        }
+
+        .add-btn,
+        .update-btn {
+            background-color: #4CAF50;
+            /* Green background */
+            border: 1px solid green;
+            /* Green border */
+            color: white;
+            /* White text */
+            padding: 10px 24px;
+            /* Some padding */
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+
+        td,
+        th {
+            border-bottom: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+            color: black;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+
+        .add-btn {
+            background-color: #4CAF50;
+            /* Green background */
+            border: 1px solid green;
+            /* Green border */
+            color: white;
+            /* White text */
+            padding: 10px 24px;
+            /* Some padding */
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+
+        .cancel-btn {
+            background-color: red;
+            /* Green background */
+            border: 1px solid green;
+            /* Green border */
+            color: white;
+            /* White text */
+            padding: 10px 24px;
+            /* Some padding */
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-flued">
+        <h1 style="text-align: center; margin-top:20px;">Hospital management system</h1>
+    </div>
+
+    <!--vertical nav bar-->
+    <div class="container-flued">
+        <div class="row">
+            <div class="col-sm-2 px-0">
+                <div class="vertical-menu">
+                    <div class="vertical-menu-ul">
+                        <li><a href="dashboard.html"><i class="fa fa-bars" style="margin-right:10px;"></i>Dashboard</a></li>
+                        <li><a href="Patient.html"><i class="fa fa-id-card-alt"
+                                    style="margin-right:10px;"></i>Patient</a></li>
+                        <li><a class="active" href="visit-newpatient.html"><i class="fa fa-user"
+                                    style="margin-right:10px;"></i>Visit</a></li>
+                        <li><a href="prescription.html"><i class="fas fa-file-prescription"
+                                    style="margin-right:10px;"></i>
+                                Prescription</a></li>
+                        <li><a href="drugs.html"><i class="fas fa-pills" style="margin-right:10px;"></i>Drug</a></li>
+                        <li><a href="medicalService.html"><i class="fas fa-x-ray" style="margin-right:10px;"></i>Medical
+                                service</a></li>
+                        <li><a href="disease.html"><i class="fas fa-biohazard" style="margin-right:10px;"></i>ICD</a>
+                        </li>
+
+                    </div>
+                </div>
+            </div>
+            <!--inside main row-->
+            <div class="col-sm-10">
+                <div class="row">
+                    <h1 id="Visit-management"><i class="fa fa-info-circle" id="info-circle"></i>Visit management</h1>
+                </div>
+
+                <div class="row" id="tab">
+                    <button class="tablink" onclick="openPage('Visit-list', this, '#007DB4')">
+                        <i class="fa fa-bars" style="margin-right: 10px;" id="defaultOpen"></i>Visit
+                        List</button>
+                    <button class="tablink" onclick="openPage('Add-visit-newPatient', this, '#007DB4')"><i
+                            class="fas fa-plus" style="margin-right: 10px;"></i>Add
+                        visit for new patient</button>
+                    <button class="tablink" onclick="openPage('Add-visit-returningPatient', this, '#007DB4')"><i
+                            class="fas fa-plus" style="margin-right: 10px;"></i>Add
+                        visit for returning patient</button>
+                    <button class="tablink" onclick="openPage('Edit-prescription', this, '#007DB4')"><i
+                            class="fas fa-edit" style="margin-right: 10px;"></i>Edit
+                        visit</button>
+                </div>
+
+                <div class="row">
+                    <div class="container">
+                        <div id="Visit-list" class="tabcontent">
+                            <input type="text" id="searchInput" onkeyup="searchName()" placeholder="Search for names.."
+                                title="Type in a name">
+                            <table id="table-id">
+                                <thead>
+                                    <tr>
+                                        <th>Patient Name</th>
+                                        <th>Problems</th>
+                                        <th>Date</th>
+                                        <th>ICD</th>
+                                        <th>Option</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="viewTable"></tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="container">
+                        <div id="Add-visit-newPatient" class="tabcontent">
+                            <div class="row" style="border: none; padding: 20px;">
+
+                                <label for="name">Patient Name: </label></br>
+                                <input type="text" id="name1" class="form-control" placeholder="Enter name">
+
+                                <label for="gender">Gender:</label></br>
+                                <select id="gender1" name="gender" class="form-control" style="width: 10%">
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Other">Other</option>
+                                </select>
+
+                                <label for="dob">Date of birthday:</label></br>
+                                <input type="date" id="dob1" class="form-control">
+                            </div>
+
+                            <div class="row" style="border: none; padding: 20px;">
+                                <label for="address">Address:</label>
+                                <input type="text" class="form-control" id="address1" name="address"
+                                    style="width: 100%">
+                            </div>
+
+                            <div class="row" style="border: none; padding: 20px;">
+                                <label for="name">Visit Date:</label>
+                                <input type="date" class="form-control" id="date1" name=" date" style="width: 20%;">
+
+                                <label for="name">Visit Time:</label>
+                                <input type="time" class="form-control" id="time1" name=" time" style="width: 20%">
+
+                                <label for="name">Problems:</label>
+                                <input type="text" class="form-control" id="problem1" name=" problems">
+                            </div>
+
+                            <div class="row" style="border: none; padding: 20px;">
+                                <label>ICD ID:</label>
+                                <input type="number" class="form-control" id="idicd1"
+                                    style="width: 10%; margin-right: 15%;" readonly>
+
+                                <label>ICD:</label>
+                                <input type="text" class="form-control" id="icd1"
+                                    style="width: 10%; margin-right: 15%;">
+
+
+                            </div>
+                            <div id="service-list1" class="row"></div>
+                            <div class="row" style="border: none; padding: 20px;">
+                                <button class="add-btn" onclick="doAdd()">Add</button>
+                                <button class="cancel-btn" onclick="cancel()">Cancel</button>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="container">
+                        <div id="Add-visit-returningPatient" class="tabcontent">
+                            <h2 style="color: black; border-bottom: 1px dotted">Patient information</h2>
+                            <!-- Date and time-->
+                            <div class="row" style="border: none; padding: 20px;">
+
+                                <label for="id">Patient Id: </label>
+                                <input type="number" class="form-control" style="width: 10%" id="id2" readonly>
+
+
+                                <label for="pname">Patient Name</label>
+                                <input type="text" class="form-control" style="width: 30%" id="name2">
+
+
+                                <!-- <label for="gender">Gender:</label>
+                                <select id="gender2" name="gender" class="form-control" style="width: 10%" >
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Other">Other</option> -->
+
+                            </div>
+
+                            <h2 style="color: black; border-bottom: 1px dotted">add visit information</h2>
+                            <div class="row" style="border: none; padding: 20px;">
+
+
+
+                                <label for="date" class="mr-sm-2">Date</label>
+                                <input type="date" class="form-control" style="width: 20%" id="date2">
+
+                                <label for="time" class="mr-sm-2">Time</label>
+                                <input type="time" class="form-control" style="width: 20%" id="time2">
+
+                                <label for="name">Problems</label>
+                                <input type="text" class="form-control" id="problem2" name=" problems"
+                                    style="width: 40%">
+
+                            </div>
+
+                            <div class="row" style="border: none; padding: 20px;">
+
+                                <!-- <label>ICD ID:</label>
+                                <input type="number" class="form-control" id="idicd"
+                                    style="width: 10%; margin-right: 15%;" readonly> -->
+
+                                <label>ICD:</label>
+                                <input type="text" class="form-control" id="icd2"
+                                    style="width: 10%; margin-right: 15%;">
+
+
+                            </div>
+                            <div id="service-list" class="row"></div>
+                            <div class="row" style="border: none; padding: 20px;">
+                                <button class="add-btn" onclick="doAdd1()">Add</button>
+                                <button class="cancel-btn" onclick="cancel()">Cancel</button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="container">
+                        <div id="Edit-prescription" class='tabcontent'>
+                            <div class="row">
+                                <div class="col-sm-1"></div>
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label for="pid3">Patient Id: </label>
+                                        <input type="number" class="form-control" id="pid3" name=" pid3" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-sm-8">
+                                    <div class="form-group">
+                                        <label for="pname3">Patient Name: </label>
+                                        <input type="text" class="form-control" id="pname3" placeholder="Enter name"
+                                            name=" pname1">
+                                        <div class="valid-feedback">Valid.</div>
+                                        <div class="invalid-feedback">Please fill out this field.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label for="dob3">Date of birth:</label>
+                                        <input type="date" class="form-control" id="dob3" name="dob1">
+                                        <div class="valid-feedback">Valid.</div>
+                                        <div class="invalid-feedback">Please fill out this field.</div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-1"></div>
+                                <div class="col-sm-2">
+                                    <div class="form-group">
+                                        <label for="id3">Id: </label>
+                                        <input type="text" class="form-control" id="id3" name="id3" readOnly>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <!-- <div class="form-group">
+                                        <label for="name">Visit Time</label>
+                                        <input type="time" class="form-control" id="time3" name=" time">
+                                        <div class="valid-feedback">Valid.</div>
+                                        <div class="invalid-feedback">Please fill out this field.</div>
+                                    </div> -->
+                                </div>
+                                <div class="col-sm-3"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label for="name">Visit Date</label>
+                                        <input type="date" class="form-control" id="date3" name=" date">
+                                        <div class="valid-feedback">Valid.</div>
+                                        <div class="invalid-feedback">Please fill out this field.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="name">Problems</label>
+                                        <input type="text" class="form-control" id="problem3" name=" problems">
+                                        <div class="valid-feedback">Valid.</div>
+                                        <div class="invalid-feedback">Please fill out this field.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div id="service-list2" class="row"></div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-2"></div>
+                                <div class="col-sm-4">
+                                    <button onclick="doUpdate()">Add</button>
+                                    <!-- <button onclick="closeModel1()">Cancel</button> -->
+                                </div>
+                                <div class="col-sm-6"></div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    </div>
+    </div>
+    </div>
+
+
+    <!--
+    <div id="id02" class="modal">
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-1">
+                <div class="form-group">
+                    <label for="id1">Id: </label>
+                    <input type="number" class="form-control" id="id1" name=" id1" readOnly>
+                </div>
+            </div>
+            <div class="col-md-1">
+                <div class="form-group">
+                    <label for="pid1">Patient Id: </label>
+                    <input type="number" class="form-control" id="pid1" name=" pid1" readonly>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="pname1">Patient Name: </label>
+                    <input type="text" class="form-control" id="pname1" placeholder="Enter name" name=" pname1">
+                    <div class="valid-feedback">Valid.</div>
+                    <div class="invalid-feedback">Please fill out this field.</div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="gender1">Gender:</label>
+                    <select id="gender1" name="gender1" class="form-control">
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="dob1">Date of birth:</label>
+                    <input type="date" class="form-control" id="dob1" name="dob1">
+                    <div class="valid-feedback">Valid.</div>
+                    <div class="invalid-feedback">Please fill out this field.</div>
+                </div>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+                <div class="form-group needs-validation">
+                    <label for="address">Address:</label>
+                    <input type="text" class="form-control" id="address1" name="address">
+                    <div class="valid-feedback">Valid.</div>
+                    <div class="invalid-feedback">Please fill out this field.</div>
+                </div>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="name">Visit Date</label>
+                    <input type="date" class="form-control" id="date1" name=" date">
+                    <div class="valid-feedback">Valid.</div>
+                    <div class="invalid-feedback">Please fill out this field.</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="name">Visit Time</label>
+                    <input type="time" class="form-control" id="time1" name=" time">
+                    <div class="valid-feedback">Valid.</div>
+                    <div class="invalid-feedback">Please fill out this field.</div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="name">Problems</label>
+                    <input type="text" class="form-control" id="problem1" name=" problems">
+                    <div class="valid-feedback">Valid.</div>
+                    <div class="invalid-feedback">Please fill out this field.</div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-4">
+                <button onclick="doUpdate()">Add</button>
+                <button onclick="closeModel1()">Cancel</button>
+            </div>
+            <div class="col-md-6"></div>
+        </div>
+    </div>
+    </div>
+    </div>
+-->
+</body>
+
+</html>
+<script>
+    baseURL = "http://localhost:8080"
+    function loadVisit() {
+        $('#viewTable').html("")
+        fetch(baseURL + "/visits", {
+            headers: {
+                'Authorization': 'bearer ' + localStorage.getItem('tonken'),
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+           
+        })
+            .then((res) => res.json())
+            .then((json) => {
+                for (let i = 0; i < json.length; i++) {
+                    console.log(json)
+                    var visit = `
+                <tr> 
+                    <td> ${json[i].patient.name}</td> 
+                    <td> ${json[i].problems}</td> 
+                    <td> ${json[i].date}</td> 
+                    <td> ${json[i].icd}</td> 
+                    <td> <button class="delete-btn" onclick='doDelete(${json[i].id})'>
+                            <i class="fa fa-trash"></i>Delete
+                        </button>
+                        <button class="edit-btn" onclick= 'doView("${json[i].patient.id}", "${json[i].patient.name}", "${json[i].patient.birthdate}"," ${json[i].id}","${json[i].date}", "${json[i].problems}")'>
+                            <i class="far fa-edit"></i>Edit & View
+                        </button>
+                    </td>
+                </tr>`
+                    $("#viewTable").append(visit)
+                }
+            })
+    }
+    // ${json[i].patient.id},${json[i].patient.name}, 
+    //                       ${json[i].patient.birthdate},${json[i].id}, 
+    //                      ${json[i].time}, ${json[i].date}, ${json[i].problems}, ${lab}
+
+    loadVisit()
+
+
+    function doAdd() {
+        var labtest = { "labMeds": selectedServices }
+        var labtests = []
+        labtests.push(labtest)
+        var obj = { 'name': $('#name1').val(), "gender": $('#gender1').val(), 'address': $('#address1').val(), 'birthdate': $('#dob1').val() }
+        var visit = { 'date': $('#date1').val(), 'time': $('#time1').val(), 'problems': $('#problem1').val(), 'patient': obj, 'labTests': labtests, 'icd': $('#icd1').val() }
+        fetch(baseURL + "/visits/newpatient", {
+            headers: {
+                'Authorization': 'bearer ' + localStorage.getItem('tonken'),
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            method: 'post',
+            body: JSON.stringify(visit)
+        })
+            .then(() => loadVisit())
+            .then(() => selectedServices = [])
+        // document.getElementById('pname').value = ''
+        // document.getElementById('dob').value = ''
+        // document.getElementById('address').value = ''
+        // document.getElementById('date').value = ''
+        // document.getElementById('time').value = ''
+        // document.getElementById('problem').value = ''
+        alert("add patiet successfully")
+    }
+
+    function doAdd1() {
+        var labtest1 = { "labMeds": selectedServices }
+        var labtests1 = []
+        labtests1.push(labtest1)
+        var visit = { 'date': $('#date2').val(), 'time': $('#time2').val(), 'problems': $('#problem2').val(), 'patient': { "id": $('#id2').val() }, 'labtests': labtests1, 'icd': $('#icd2').val() }
+        fetch(baseURL + "/visits/returningpatient", {
+            headers: {
+                'Authorization': 'bearer ' + localStorage.getItem('tonken'),
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            method: 'post',
+            body: JSON.stringify(visit)
+        })
+            .then(() => loadVisit())
+            .then(() => selectedServices = [])
+        // document.getElementById('pname').value = ''
+        // document.getElementById('dob').value = ''
+        // document.getElementById('address').value = ''
+        // document.getElementById('date').value = ''
+        // document.getElementById('time').value = ''
+        // document.getElementById('problem').value = ''
+        alert("add patiet successfully")
+    }
+
+
+    function doDelete(id) {
+        if (confirm('Do you want to delete?')) {
+            fetch(baseURL + '/visits/' + id, {
+                headers: {
+                    'Authorization': 'bearer ' + localStorage.getItem('tonken'),
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                method: 'delete'
+            })
+                .then(() => loadVisit())
+        }
+    }
+
+    function doView(pid, pname, dob, id, date, problems) {
+        $('#pid3').val(pid)
+        $('#pname3').val(pname)
+        $('#dob3').val(dob)
+        $('#id3').val(id)
+        $('#date3').val(date)
+        $('#problem3').val(problems)
+
+        // for (i = 0; i < labTests.length; i++) {
+        //     console.log(labTests.id)
+        //     fetch(baseURL + "/medicalservices", {
+        //         headers: {
+        //             'Authorization': 'bearer ' + localStorage.getItem('tonken'),
+        //             'Content-Type': 'application/json',
+        //             'Accept': 'application/json'
+        //         },
+        //         method: 'get',
+        //     })
+        //         .then((res) => res.json())
+        //         .then((json) => {
+        //             for (let i = 0; i < json.length; i++) {
+        //                 var service = `
+        //             <div class = "col-md-4">
+        //             <div class="input-group mb-3">
+        //                 <div class="input-group-prepend">
+        //                     <div class="input-group-text">
+        //                         <input type="checkbox" id='${json[i].id}' value='${json[i].name}' onclick="checkStatus(this)">
+        //                         ${json[i].name}
+        //             </div>
+        //             </div>`
+        //                 $("#service-list2").append(service)
+        //             }
+        //         })
+        // for (j = 0; j < labTests.labMeds.length; j++) {
+        //     console.log(labTests.labMeds)
+        // var id = labTests.labMeds.medicalService.id
+        // document.getElementById(id).checked = true
+    }
+
+
+
+
+
+
+    function doUpdate() {
+        var id = $('#id3').val()
+        var obj = { 'name': $('#pname3').val(), "gender": $('#gender3').val(), 'address': $('#address3').val(), 'birthdate': $('#dob3').val() }
+        var visit = { "id": id, 'date': $('#date3').val(), 'time': $('#time3').val(), 'problems': $('#problem3').val(), 'patient': { "id": $('#pid3').val() } }
+        fetch(baseURL + "/visits", {
+            headers: {
+                'Authorization': 'bearer ' + localStorage.getItem('tonken'),
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            method: 'PUT',
+            body: JSON.stringify(visit)
+        })
+            .then(() => loadVisit())
+    }
+
+
+    function findPatients() {
+        var body = document.getElementById("body")
+        body.innerHTML = ''
+        var input = $('#input-name').val()
+        // var table = document.getElementById("header")
+        fetch(baseURL + "/patients/findbyname/" + input
+            , {
+                headers: {
+                    'Authorization': 'bearer ' + localStorage.getItem('tonken'),
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                method: 'PUT',
+            })
+            .then((res) => res.json())
+            .then((json) => {
+                for (let i = 0; i < json.length; i++) {
+                    var patient = `
+           <tr> 
+                <td>
+                    <a onclick="addPatient(${json[i].id}, '${json[i].name}')">
+                        ${json[i].id} 
+                    </a>  
+                </td>                     
+                <td>
+                    <a onclick="addPatient(${json[i].id}, '${json[i].name}')">
+                        ${json[i].name}
+                    </a>
+                </td>                     
+                <td>
+                    <a onclick="addPatient(${json[i].id}, '${json[i].name}')">
+                        ${json[i].gender}
+                    </a>
+                </td>                     
+                <td>
+                    <a onclick="addPatient(${json[i].id}, '${json[i].name}')">
+                        ${json[i].birthdate}
+                    </a>
+                </td>                     
+                <td>
+                    <a onclick="addPatient(${json[i].id}, '${json[i].name}' , '${json[i].birthdate}')">
+                        ${json[i].address}
+                    </a>
+                </td>                               
+            </tr>`
+                    $("#body").append(patient)
+                }
+            })
+    }
+
+    // This is find the patient by name and then wrtie the data into input
+    function addPatient(id, name, birthdate) {
+
+        alert("Hello")
+        $('#patient-id').val(id)
+        $('#patient-name').val(name)
+        $('#patient-birthdate').val(birthdate)
+    }
+
+    // $("#icd").autocomplete({
+    //     source: function (request, response) {
+    //         $.ajax({
+    //             url: baseURL + "/icd/search",
+    //             dataType: "json",
+    //             data: "s=" + request.term,
+    //             success: function (data) {
+    //                 //alert(data)
+    //                 response($.map(data, function (item) {
+    //                     return {
+    //                         label: item.id + "-" + item.name,
+    //                         value: item.name
+    //                     };
+    //                 }));
+    //             }
+    //         });
+    //     },
+    //     minLength: 1,
+    //     select: function (event, ui) {
+    //         var label = ui.item.label
+    //         var id = label.split('-')[0].trim()
+    //         $('#icdid').val(id)
+    //     }
+
+    // });
+
+
+    function loadMedicalServices() {
+        $('#service-list').html("")
+        fetch(baseURL + "/medicalservices", {
+            headers: {
+                'Authorization': 'bearer ' + localStorage.getItem('tonken'),
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            method: 'get',
+        })
+            .then((res) => res.json())
+            .then((json) => {
+                for (let i = 0; i < json.length; i++) {
+                    var service = `
+                    <div class = "col-md-4">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <input type="checkbox" id='${json[i].id}' value='${json[i].name}' onclick="checkStatus(this)">
+                                ${json[i].name}
+                    </div>
+                    </div>`
+                    $("#service-list").append(service)
+                    $("#service-list1").append(service)
+
+                }
+            })
+
+    }
+    loadMedicalServices()
+
+    var selectedServices = []
+
+    function checkStatus(checkbox) {
+        if (checkbox.checked) {
+
+            var labobj = { "id": checkbox.id }
+
+            var serviceobj = { "medicalService": labobj }
+            selectedServices.push(serviceobj)
+            // var lfckv = document.getElementById("lifecheck").checked;
+
+        } else {
+            for (i = 0; i < selectedServices.length; i++) {
+                if (selectedServices[i] === checkbox.id) {
+                    selectedServices.splice(i, 1)
+                }
+            }
+        }
+    }
+
+    //This is function for cancel button
+    function cancel() {
+        window.location.href = "visit-newpatient.html"
+    }
+
+    //This is using for tab bar
+    function openPage(pageName, elmnt, color) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablink");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].style.backgroundColor = "";
+        }
+        document.getElementById(pageName).style.display = "block";
+        elmnt.style.backgroundColor = color;
+    }
+
+    // Get the element with id="defaultOpen" and click on it
+    document.getElementById("defaultOpen").click();
+
+    // function findDisease() {
+    //     var body = document.getElementById("body");
+    //     body.innerHTML = ''
+    //     var input = $('#icd1').val()
+    //     fetch(baseURL + "/diseases/findbyname/" + input, {
+    //         headers: {
+    //                 'Authorization': 'bearer ' + localStorage.getItem('tonken'),
+    //                 'Content-Type': 'application/json',
+    //                 'Accept': 'application/json'
+    //             },
+    //             method: 'GET'
+    //     })
+    // }
+
+    $("#icd1").autocomplete({
+        source: function (request, response) {
+            $.ajax({
+                url: baseURL + "/diseases/",
+                headers: {
+                    'Authorization': 'bearer ' + localStorage.getItem('tonken'),
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+
+                dataType: "json",
+                data: "name=" + request.term,
+                success: function (data) {
+                    //alert(data)
+                    response($.map(data, function (item) {
+                        return {
+                            label: item.id + ' - ' + item.name,
+                            value: item.name
+
+                        };
+                    }));
+                }
+            });
+        },
+        minLength: 1,
+        select: function (event, ui) {
+            var label = ui.item.label
+            var id = label.split('-')[0].trim()
+            $('#idicd1').val(id)
+
+
+
+            // $('#search').val(ui.item.label)
+        }
+    });
+
+    $("#icd2").autocomplete({
+        source: function (request, response) {
+            $.ajax({
+                url: baseURL + "/diseases/",
+                headers: {
+                    'Authorization': 'bearer ' + localStorage.getItem('tonken'),
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+
+                dataType: "json",
+                data: "name=" + request.term,
+                success: function (data) {
+                    //alert(data)
+                    response($.map(data, function (item) {
+                        return {
+                            label: item.id + ' - ' + item.name,
+                            value: item.name
+
+                        };
+                    }));
+                }
+            });
+        },
+        minLength: 1,
+        select: function (event, ui) {
+
+
+
+
+            // $('#search').val(ui.item.label)
+        }
+    });
+
+
+    $("#name2").autocomplete({
+        source: function (request, response) {
+            $.ajax({
+                url: baseURL + "/patients/findbyname/",
+                headers: {
+                    'Authorization': 'bearer ' + localStorage.getItem('tonken'),
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+
+                dataType: "json",
+                data: "name=" + request.term,
+                success: function (data) {
+                    //alert(data)
+                    response($.map(data, function (item) {
+                        return {
+                            label: item.id + ' - ' + item.name,
+                            value: item.name
+
+                        };
+                    }));
+                }
+            });
+        },
+        minLength: 1,
+        select: function (event, ui) {
+            var label = ui.item.label
+            var id = label.split('-')[0].trim()
+            $('#id2').val(id)
+
+
+
+            // $('#search').val(ui.item.label)
+        }
+    });
+</script>
