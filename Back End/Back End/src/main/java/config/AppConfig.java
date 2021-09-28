@@ -39,9 +39,9 @@ public class AppConfig {
 
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("org.postgresql.Driver");
-        dataSource.setUrl("jdbc:postgresql://localhost:5432/hello");
-        dataSource.setUsername("postgres");
-        dataSource.setPassword("Anhtu1996");
+        dataSource.setUrl("your project url");
+        dataSource.setUsername("your postgresql DB name");
+        dataSource.setPassword("your DB passward");
 
         sessionFactoryBean.setDataSource(dataSource);
         sessionFactoryBean.setHibernateProperties(properties);
